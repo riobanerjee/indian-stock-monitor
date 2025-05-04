@@ -102,8 +102,8 @@ def fetch_and_process_stocks(request):
             rows.append(row)
             
             # Send alert if anomaly detected
-            if is_anomaly:
-                send_alert(symbol, close, percent_change)
+            # if is_anomaly:
+            #     send_alert(symbol, close, percent_change)
             
         except Exception as e:
             print(f"Error processing {symbol}: {str(e)}")
@@ -121,38 +121,38 @@ def fetch_and_process_stocks(request):
     
     return "No data to process", 200
 
-def send_alert(symbol, close, percent_change):
-    """Simple function to send email alerts"""
-    from sendgrid import SendGridAPIClient
-    from sendgrid.helpers.mail import Mail
+# def send_alert(symbol, close, percent_change):
+#     """Simple function to send email alerts"""
+#     from sendgrid import SendGridAPIClient
+#     from sendgrid.helpers.mail import Mail
     
-    sendgrid_api_key = os.environ.get('SENDGRID_API_KEY')
-    from_email = os.environ.get('FROM_EMAIL')
-    to_email = os.environ.get('TO_EMAIL')
+#     sendgrid_api_key = os.environ.get('SENDGRID_API_KEY')
+#     from_email = os.environ.get('FROM_EMAIL')
+#     to_email = os.environ.get('TO_EMAIL')
     
-    direction = "up" if percent_change > 0 else "down"
+#     direction = "up" if percent_change > 0 else "down"
     
-    message = Mail(
-        from_email=from_email,
-        to_emails=to_email,
-        subject=f"Stock Alert: {symbol} moved {direction} by {abs(percent_change):.2f}%",
-        html_content=f"""
-        <h3>Stock Movement Alert</h3>
-        <p>Symbol: <strong>{symbol}</strong></p>
-        <p>Current Price: <strong>₹{close:.2f}</strong></p>
-        <p>Change: <strong>{percent_change:.2f}%</strong></p>
-        <p>Date: {datetime.datetime.now().strftime('%Y-%m-%d')}</p>
-        """
-    )
+#     message = Mail(
+#         from_email=from_email,
+#         to_emails=to_email,
+#         subject=f"Stock Alert: {symbol} moved {direction} by {abs(percent_change):.2f}%",
+#         html_content=f"""
+#         <h3>Stock Movement Alert</h3>
+#         <p>Symbol: <strong>{symbol}</strong></p>
+#         <p>Current Price: <strong>₹{close:.2f}</strong></p>
+#         <p>Change: <strong>{percent_change:.2f}%</strong></p>
+#         <p>Date: {datetime.datetime.now().strftime('%Y-%m-%d')}</p>
+#         """
+#     )
     
-    try:
-        sg = SendGridAPIClient(sendgrid_api_key)
-        response = sg.send(message)
-        print(f"Alert sent for {symbol}, status code: {response.status_code}")
-        return True
-    except Exception as e:
-        print(f"Error sending alert for {symbol}: {str(e)}")
-        return False
+#     try:
+#         sg = SendGridAPIClient(sendgrid_api_key)
+#         response = sg.send(message)
+#         print(f"Alert sent for {symbol}, status code: {response.status_code}")
+#         return True
+#     except Exception as e:
+#         print(f"Error sending alert for {symbol}: {str(e)}")
+#         return False
 
 # HTTP Trigger
 @functions_framework.http

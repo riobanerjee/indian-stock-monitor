@@ -7,7 +7,6 @@ CREATE TABLE indian_stock_pipeline.stocks (
   percent_change FLOAT64,
   is_anomaly BOOL,
   timestamp TIMESTAMP NOT NULL,
-  PRIMARY KEY(symbol, date)
 ) PARTITION BY date;
 
 -- stocks to track
