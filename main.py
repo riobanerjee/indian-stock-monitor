@@ -20,7 +20,7 @@ def get_tracked_symbols():
 def get_historical_data(symbol, days=7):
     """Get historical data for calculating moving average"""
     query = f"""
-    SELECT date, close 
+    SELECT date, price 
     FROM `{project_id}.indian_stock_pipeline.stocks`
     WHERE symbol = '{symbol}'
     ORDER BY date DESC
@@ -65,15 +65,17 @@ def fetch_stocks(request):
             extracted_data = {
                 'symbol': symbol,
                 'date': today,
-                'close': float(data.get('currentPrice', {}).get('BSE', 0)),
-                'volume': int(data.get('stockTechnicalData', {}).get('volume', 0)),
-                'percent_change': float(data.get('percentChange', 0)),
+                'price': float(data['currentPrice']['NSE']),
+                'year_high': float(data['yearHigh']),
+                'year_low': float(data['yearLow']),
+                'risk': data['riskMeter']['categoryName'],
+                'percent_change': float(data['percentChange']),
                 'timestamp': datetime.datetime.now().isoformat()
             }
             
             # Calculate 7-day moving average
             hist_data = get_historical_data(symbol)
-            ma_7day = extracted_data['close'] if hist_data.empty else np.mean(hist_data['close'].tolist() + [extracted_data['close']])
+            ma_7day = extracted_data['price'] if hist_data.empty else np.mean(hist_data['price'].tolist() + [extracted_data['price']])
             extracted_data['ma_7day'] = ma_7day
             
             # Detect anomaly

@@ -1,8 +1,10 @@
 CREATE TABLE indian_stock_pipeline.stocks (
   symbol STRING NOT NULL,
   date DATE NOT NULL,
-  close FLOAT64 NOT NULL,
-  volume INT64 NOT NULL,
+  price FLOAT64 NOT NULL,
+  year_high FLOAT64,
+  year_low FLOAT64,
+  risk STRING,
   ma_7day FLOAT64,
   percent_change FLOAT64,
   is_anomaly BOOL,
