@@ -26,8 +26,8 @@ def test_indian_stock_api():
             if status_code == 200:
                 data = response.json()
                 print(f"Successfully fetched data for {symbol}")
-                print(f"Current price: {data.get('currentPrice')}")
-                print(f"percentChange: {data.get('percentChange')}")
+                print(f"Current price: {data['currentPrice']['NSE']}")
+                print(f"percentChange: {data['percentChange']}")
                 results[symbol] = "Success"
             else:
                 print(f"Failed to fetch data. Status code: {status_code}")

@@ -4,6 +4,7 @@ certifi==2025.4.26
 charset-normalizer==3.4.2
 click==8.1.8
 cloudevents==1.11.0
+db-dtypes==1.4.2
 deprecation==2.1.0
 Flask==3.1.0
 functions-framework==3.8.2
@@ -26,6 +27,7 @@ packaging==25.0
 pandas==2.2.3
 proto-plus==1.26.1
 protobuf==6.31.0rc2
+pyarrow==20.0.0
 pyasn1==0.6.1
 pyasn1_modules==0.4.2
 python-dateutil==2.9.0.post0
