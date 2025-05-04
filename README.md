@@ -1,4 +1,3 @@
-cat > README.md << 'EOF'
 # Simplified Indian Stock Market Monitoring
 
 A lightweight pipeline that fetches, analyzes, and visualizes Indian stock market data using Google Cloud Platform services.
