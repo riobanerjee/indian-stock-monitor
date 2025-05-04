@@ -4,7 +4,7 @@ A lightweight, serverless GCP pipeline that fetches, analyzes, and visualizes In
 
 ## Features
 
-- Daily data ingestion from Indian Stock Exchange API
+- Daily data ingestion from [Indian Stock Exchange API](https://indianapi.in/indian-stock-market) (free tier)
 - Technical indicators (7-day moving average)
 - Anomaly detection (>3% price movements)
 - Risk categorization
